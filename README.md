@@ -54,9 +54,3 @@ Basic logging is set up to track the process and handle any errors.
 ## **License**
 
 Specify your license or terms of use here.
-
-```markdown
-Copy code
-This README provides a clear overview of the script, its functions, usage, and setup requirements.
-
-```
