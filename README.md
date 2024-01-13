@@ -1,5 +1,5 @@
 # bluebook
-```markdown
+
 # Legal Citation Checker
 
 ## Description
@@ -22,11 +22,8 @@ This Python script utilizes the `eyecite`, `requests`, and OpenAI's `gpt-4-1106-
 1. Install required Python libraries:
 
 ```
-
 pip install eyecite openai requests
-
-```vbnet
-vbnetCopy code
+```
 2. Set up OpenAI API key as per OpenAI's documentation.
 
 ## Usage
