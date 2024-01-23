@@ -58,4 +58,4 @@ Basic logging is set up to track the process and handle any errors.
 
 ### **License**
 
-Specify your license or terms of use here
+This project is licensed under the MIT License.
