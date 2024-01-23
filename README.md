@@ -1,19 +1,12 @@
 ### **Description**
 
-This Python script utilizes the
-```python
-eyecite
-```
-,
-```python
-requests
-```
-, and OpenAI's
+This Python script leverages the following tools for processing and validating legal citations:
 
-```python
-gpt-4-1106-preview
-```
-model to process and validate legal citations. It checks the factual accuracy and compliance with the 21st edition of the Legal Bluebook. The script is designed to clean and extract legal citations from a given text, validate their accuracy and compliance with standards via GPT-4, enrich them with external case data from the Court Listener API, and then display these details concurrently using multi-threading for efficiency.
+- `eyecite`: For citation extraction.
+- `requests`: For fetching data from the Court Listener API.
+- OpenAI's `gpt-4-1106-preview` model: For analyzing factual accuracy and compliance with the 21st edition of the Legal Bluebook.
+
+The script's primary function is to clean and extract legal citations from text, validate their accuracy and compliance with legal standards via the GPT-4 model, enrich them with external case data from the Court Listener API, and display these details efficiently using multi-threading.
 
 ### **Features**
 
@@ -50,10 +43,7 @@ model to process and validate legal citations. It checks the factual accuracy an
 
 ### **Example**
 
-`pythonexample_text = "As held in Roe v. Wade, 410 U.S. 113 (1973), privacy rights are fundamental. See also Planned Parenthood v. Casey, 505 U.S. 833 (1993)."
-citation_results = check_citations(example_text)
-for citation_text, gpt4_feedback, court_listener_data in citation_results:
- print(f"Citation: {citation_text}\nGPT-4 Feedback: {gpt4_feedback}\nCourt Listener Data: {court_listener_data}\n")`
+`pythonexample_text = "As held in Roe v. Wade, 410 U.S. 113 (1973), privacy rights are fundamental. See also Planned Parenthood v. Casey, 505 U.S. 833 (1993)." citation_results = check_citations(example_text) for citation_text, gpt4_feedback, court_listener_data in citation_results:  print(f"Citation: {citation_text}\\nGPT-4 Feedback: {gpt4_feedback}\\nCourt Listener Data: {court_listener_data}\\n")`
 
 ### **Function Descriptions**
 
