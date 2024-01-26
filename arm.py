@@ -36,6 +36,15 @@ client = OpenAI()
 
 # Function to interact with the GPT-4 API for enhanced parsing
 def gpt4_parse_citations(citations):
+    """
+    Parses the provided legal citations for factual accuracy and Legal Bluebook compliance.
+
+    Args:
+        citations (list): A list of legal citations to be parsed.
+
+    Returns:
+        str: The parsed content of the first completion choice from the GPT-4 API, or None if the API request fails.
+    """
     messages = [
         {"role": "system", "content": "You are a helpful, fact-checking, legal assistant. Your task is to check the provided legal citations for factual accuracy (e.g.,  does the the citation contain the correct year of case, the correct court, parties, reporter, volume, pages, etc.) and for 21 edition Legal Bluebook compliance. If you do not know the correct information, tell the user you are not sure."}
     ] + [{"role": "user", "content": citation} for citation in citations]
