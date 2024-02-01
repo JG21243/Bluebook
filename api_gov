@@ -1,0 +1,12 @@
+import requests
+
+api_key = 'ibp9U7NDLkx1l888T1NtIi1iXlZqLAADLScIm54l'  # replace with your actual API key
+url = f'https://api.congress.gov/v3/bill?api_key={api_key}'
+
+response = requests.get(url)
+
+# The response's content will be in JSON format
+data = response.json()
+
+# Print the response data to the terminal
+print(data)
