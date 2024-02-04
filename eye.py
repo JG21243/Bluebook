@@ -1,3 +1,4 @@
+
 # Import required modules
 from eyecite import get_citations, resolve_citations
 from eyecite.clean import clean_text
@@ -10,7 +11,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 # Initialize the OpenAI client
-client = OpenAI()
+client = OpenAI(api_key="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")
 
 def gpt4_parse_citations(citations):
     """
@@ -23,7 +24,7 @@ def gpt4_parse_citations(citations):
         str: The parsed content of the first completion choice from the GPT-4 API, or None if the API request fails.
     """
     messages = [
-        {"role": "system", "content": "You are a helpful, fact-checking, legal assistant. Your task is to check the provided legal citations for factual accuracy (e.g.,  does the the citation contain the correct year of case, the correct court, parties, reporter, volume, pages, etc.) and for 21 edition Legal Bluebook compliance. If you do not know the correct information, tell the user you are not sure."}
+        {"role": "system", "content": "You are a helpful, fact-checking, legal assistant. Your task is to check the provided legal citations for factual accuracy (e.g.,  does the the citation contain the correct <year> of case, the correct <court>, <parties>, <reporter>, <volume>, <pages>, etc.) and for 21 edition Legal Bluebook compliance. If you do not know the correct information, tell the user you are not sure."}
     ] + [{"role": "user", "content": citation} for citation in citations]
 
     try:
@@ -36,6 +37,7 @@ def gpt4_parse_citations(citations):
         logging.error(f"GPT-4 API request failed: {e}")
         return None
 
+# Function to fetch case data from the Court Listener API
 def fetch_case_data_from_court_listener(citation):
     """
     Fetches case data from the Court Listener API for a given citation.
@@ -54,6 +56,7 @@ def fetch_case_data_from_court_listener(citation):
     else:
         return None
 
+# Function to handle each citation batch
 def process_citations_batch(citations_batch, results):
     """
     Process a batch of citations.
@@ -70,6 +73,7 @@ def process_citations_batch(citations_batch, results):
         gpt4_feedback = gpt4_parse_citations([str(citation)])
         results.append((str(citation), gpt4_feedback, court_listener_data))
 
+# Citation checker function that uses both Eyecite, GPT-4, and Court Listener API
 def check_citations(text):
     """
     Check citations in the given text.
