@@ -1,52 +1,46 @@
-import os
 import openai
 import pandas as pd
-import json
+import eyecite
+from eyecite import get_citations, resolve_citations
 
-# Set the OpenAI API key from an environment variable
-openai.api_key = os.getenv('OPENAI_API_KEY')
+# Initialize the OpenAI client with your API key
+openai.api_key = 'YOUR_API_KEY'
 
 def extract_citations_with_features(text):
-    """
-    Extract legal citations and their features from the provided text.
+    # Clean the text and extract citations using eyecite
+    citations = get_citations(text)
     
-    Parameters:
-    text (str): The text containing legal citations.
+    # Resolve the citations to get more information about them
+    resolved_citations = resolve_citations(citations)
     
-    Returns:
-    DataFrame: A DataFrame with the features of each citation.
-    """
-    columns = ["Citation", "Type", "Signal", "Year", "Court", "Page", "Volume", "Reporter", "Case Name"]
+    # Initialize an empty list to store the features of each citation
     citations_data = []
-
-    prompt = f"Extract legal citations and their features from the following text:\n\n{text}"
     
-    try:
-        response = openai.Completion.create(
-            engine="gpt-3.5-turbo",
-            prompt=prompt,
-            max_tokens=200,
-            temperature=0.5
-        )
-        # Safely parse the JSON response
-        citations = json.loads(response['choices'][0]['text'])
-        
-        for citation in citations:
-            citations_data.append(citation)
-            
-    except json.JSONDecodeError as e:
-        print(f"JSON parsing error: {e}")
-    except openai.error.OpenAIError as e:
-        print(f"OpenAI API error: {e}")
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+    # Iterate over the resolved citations and extract their features
+    for citation in resolved_citations:
+        citation_data = {
+            "Citation": str(citation),
+            "Type": type(citation).__name__,
+            "Signal": citation.metadata.signal if citation.metadata else None,
+            "Year": citation.metadata.year if citation.metadata else None,
+            "Court": citation.metadata.court if citation.metadata else None,
+            "Page": citation.metadata.pin_cite if citation.metadata else None,
+            "Volume": citation.volume.volume if citation.volume else None,
+            "Reporter": citation.reporter.reporter if citation.reporter else None,
+            "Case Name": citation.metadata.case_name if citation.metadata else None
+        }
+        citations_data.append(citation_data)
     
-    return pd.DataFrame(citations_data, columns=columns)
+    # Convert the list of dictionaries to a DataFrame
+    df = pd.DataFrame(citations_data)
+    return df
 
-# Example usage
+# Example text containing legal citations
 text = """
 The Supreme Court of the United States has held that the First Amendment protects freedom of speech. 
 See, e.g., Marbury v. Madison, 5 U.S. 137, 177–79 (1803); 42 U.S.C. §§ 2000e et seq.
 """
+
+# Extract citations and their features from the example text
 df = extract_citations_with_features(text)
 print(df)
