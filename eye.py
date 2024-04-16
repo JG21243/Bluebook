@@ -1,4 +1,20 @@
 
+
+"""
+This module provides a function for parsing legal citations for factual accuracy and Legal Bluebook compliance.
+
+The main function, `gpt4_parse_citations`, takes a list of legal citations as input and uses the GPT-4 API to parse the citations. It checks for factual accuracy by verifying if the citations contain the correct year of the case, the correct court, parties, reporter, volume, pages, etc. It also checks for compliance with the 21st edition of the Legal Bluebook.
+
+If the GPT-4 API request fails, the function returns None.
+
+Note: This module requires the `client` object to be initialized before calling the `gpt4_parse_citations` function.
+
+Example usage:
+    citations = ["Smith v. Johnson, 2022 WL 1234567 (Supreme Court)"]
+    result = gpt4_parse_citations(citations)
+    print(result)
+"""
+
 # Import required modules
 from eyecite import get_citations, resolve_citations
 from eyecite.clean import clean_text
@@ -12,7 +28,6 @@ logging.basicConfig(level=logging.INFO)
 
 # Initialize the OpenAI client
 client = OpenAI(api_key="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")
-
 def gpt4_parse_citations(citations):
     """
     Parses the provided legal citations for factual accuracy and Legal Bluebook compliance.
