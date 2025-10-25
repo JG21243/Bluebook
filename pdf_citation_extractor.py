@@ -25,15 +25,13 @@ def find_first_full_case_citation(citations):
     return None
 
 def print_citation_details(citation):
-    #print(dir(citation))  # Lists all attributes and methods
+    """
+    Print details about a citation object.
 
-    # To see the value of a specific attribute, for example, 'reporter'
+    Args:
+        citation: The citation object to print details for.
+    """
     print(getattr(citation, 'corrected_citation', 'Attribute not found'))
-
-    # Or simply using dot notation if you know the attribute exists
-    #print(citation.corrected_citation())
-
-    #print(citation.groups['reporter'])
 
 # Example usage (commented out - provide your own PDF path)
 # if __name__ == "__main__":
