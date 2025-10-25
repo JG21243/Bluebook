@@ -27,12 +27,13 @@ from openai import OpenAI
 import requests
 import threading
 import logging
+import os
 
 # Set up basic logging
 logging.basicConfig(level=logging.INFO)
 
 # Initialize the OpenAI client
-client = OpenAI()
+client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 # Function to interact with the GPT-4 API for enhanced parsing
 def gpt4_parse_citations(citations):
@@ -62,11 +63,12 @@ def gpt4_parse_citations(citations):
 # Function to fetch case data from the Court Listener API
 def fetch_case_data_from_court_listener(citation):
     url = f"https://www.courtlistener.com/api/rest/v3/search/?type=o&q={citation}"
-    headers = {'Authorization': 'Token 974993b55ad4144adf83d3fe942abc7210e6e10a'}
+    headers = {'Authorization': f"Token {os.getenv('COURT_LISTENER_TOKEN')}"}
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         return response.json()
     else:
+        logging.error(f"Court Listener API request failed with status {response.status_code}")
         return None
 
 # Function to handle each citation batch
