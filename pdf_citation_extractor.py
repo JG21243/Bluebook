@@ -25,30 +25,31 @@ def find_first_full_case_citation(citations):
     return None
 
 def print_citation_details(citation):
-    #print(dir(citation))  # Lists all attributes and methods
+    """
+    Print details about a citation object.
 
-    # To see the value of a specific attribute, for example, 'reporter'
+    Args:
+        citation: The citation object to print details for.
+    """
     print(getattr(citation, 'corrected_citation', 'Attribute not found'))
 
-    # Or simply using dot notation if you know the attribute exists
-    #print(citation.corrected_citation())
-
-    #print(citation.groups['reporter'])
-
-# Path to your PDF document
-def new_func():
-    pdf_path = 'Your/PDF/PATH.pdf'
-    return pdf_path
-
-pdf_path = new_func()
-
-# Read the PDF file and extract text
-reader = PdfReader(pdf_path)
-text = ""
-for page in reader.pages:
-    text += page.extract_text()
-
-citations = extract_citations(text)
-full_case_citation = find_first_full_case_citation(citations)
-if full_case_citation is not None:
-    print_citation_details(full_case_citation)
+# Example usage (commented out - provide your own PDF path)
+# if __name__ == "__main__":
+#     import sys
+#
+#     if len(sys.argv) > 1:
+#         pdf_path = sys.argv[1]
+#     else:
+#         # Default example path - replace with your PDF path
+#         pdf_path = 'path/to/your/legal_document.pdf'
+#
+#     # Read the PDF file and extract text
+#     reader = PdfReader(pdf_path)
+#     text = ""
+#     for page in reader.pages:
+#         text += page.extract_text()
+#
+#     citations = extract_citations(text)
+#     full_case_citation = find_first_full_case_citation(citations)
+#     if full_case_citation is not None:
+#         print_citation_details(full_case_citation)

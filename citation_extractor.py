@@ -72,11 +72,18 @@ def extract_text_and_resolve_citations(pdf_path):
     resolved_citations = extract_and_resolve_citations(text)
     return [resource_to_dict(citation) for citation in resolved_citations if resource_to_dict(citation)]
 
-# Path to your PDF document
-pdf_path = '/Users/joshglen/Downloads/Sophisticated Robots- Balancing Liability Regulation and Inno.pdf'
-resolved_citations = extract_text_and_resolve_citations(pdf_path)
-
-# Convert the output to pretty JSON format and print
-pretty_json_output = json.dumps(resolved_citations, indent=4)
-print(pretty_json_output)
+# Example usage (commented out - provide your own PDF path)
+# if __name__ == "__main__":
+#     import sys
+#     if len(sys.argv) > 1:
+#         pdf_path = sys.argv[1]
+#     else:
+#         # Default example path - replace with your PDF path
+#         pdf_path = 'path/to/your/legal_document.pdf'
+#
+#     resolved_citations = extract_text_and_resolve_citations(pdf_path)
+#
+#     # Convert the output to pretty JSON format and print
+#     pretty_json_output = json.dumps(resolved_citations, indent=4)
+#     print(pretty_json_output)
 

@@ -1,0 +1,23 @@
+# Bluebook Legal Citation Processor - Dependencies
+# Install with: pip install -r requirements.txt
+
+# Core citation extraction library
+eyecite>=2.4.0,<3.0.0
+
+# OpenAI API for GPT-4 integration
+openai>=1.0.0,<2.0.0
+
+# HTTP requests for external APIs
+requests>=2.28.0,<3.0.0
+
+# PDF text extraction (PyMuPDF)
+PyMuPDF>=1.23.0,<2.0.0
+
+# Alternative PDF processing
+PyPDF2>=3.0.0,<4.0.0
+
+# Data manipulation and analysis
+pandas>=1.5.0,<3.0.0
+
+# Environment variable management
+python-dotenv>=1.0.0,<2.0.0

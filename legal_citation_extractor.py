@@ -1,10 +1,11 @@
-import openai
 import pandas as pd
 import eyecite
 from eyecite import get_citations, resolve_citations
+from openai import OpenAI
+import os
 
 # Initialize the OpenAI client with your API key
-openai.api_key = 'YOUR_API_KEY'
+client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 def extract_citations_with_features(text):
     # Clean the text and extract citations using eyecite

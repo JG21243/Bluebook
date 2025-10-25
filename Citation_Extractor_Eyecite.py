@@ -24,15 +24,13 @@ def find_first_full_case_citation(citations):
     return None
 
 def print_citation_details(citation):
-    #print(dir(citation))  # Lists all attributes and methods
+    """
+    Print details about a citation object.
 
-    # To see the value of a specific attribute, for example, 'reporter'
+    Args:
+        citation: The citation object to print details for.
+    """
     print(getattr(citation, 'corrected_citation', 'Attribute not found'))
-
-    # Or simply using dot notation if you know the attribute exists
-    #print(citation.corrected_citation())
-
-    #print(citation.groups['reporter'])
 
 text = "We conclude that this approach was error. The law has long accommodated new technologies within existing legal frameworks. See, e.g., Kyllo v. United States, 533 U.S. 27, 33-40 (2001) (holding that the use of thermal imaging technology can constitute a search under the Fourth Amendment); Thyroff v. Nationwide Mut. Ins. Co., 8 N.Y.3d 283, 292-93 (2007) (treating electronic records as property equivalent to physical records for the purposes of conversion)."
 

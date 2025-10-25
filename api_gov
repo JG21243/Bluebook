@@ -1,6 +1,10 @@
 import requests
+import os
 
-api_key = 'ibp9U7NDLkx1l888T1NtIi1iXlZqLAADLScIm54l'  # replace with your actual API key
+api_key = os.getenv('CONGRESS_API_KEY')
+if not api_key:
+    raise ValueError("CONGRESS_API_KEY environment variable is not set")
+
 url = f'https://api.congress.gov/v3/bill?api_key={api_key}'
 
 response = requests.get(url)
